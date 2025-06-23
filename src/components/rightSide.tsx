@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 export default function Rightside({
   folder,
   onSelectImage,
+  onDeleteImage,
 }: {
   folder: string;
   onSelectImage: (folder: string, src: string) => void;
+  onDeleteImage: (folder: string) => void;
 }) {
   const [images, setImages] = useState<string[]>([]);
 
@@ -30,7 +32,13 @@ export default function Rightside({
   }, [folder]);
 
   return (
-    <div className="grid grid-cols-2 flex-1/2 max-h-full min-h-[300px] w-full overflow-auto bg-neutral-400 h-full text-white gap-2 p-2">
+    <div className="grid grid-cols-2 flex-1/2 max-h-full  w-full overflow-auto bg-neutral-400 max-h-full text-white gap-2 p-2">
+      <div
+        onClick={()=>onDeleteImage(folder)}
+        className="aspect-square bg-white flex items-center justify-center cursor-pointer text-black"
+      >
+        delete
+      </div>
       {images.map((src, i) => (
         <div
           key={i}
